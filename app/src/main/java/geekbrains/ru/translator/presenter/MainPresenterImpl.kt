@@ -1,21 +1,22 @@
 package geekbrains.ru.translator.presenter
 
+import com.anikin.aleksandr.simplevocabulary.viewmodel.Interactor
 import geekbrains.ru.translator.model.data.AppState
-import geekbrains.ru.translator.model.datasource.DataSourceLocal
-import geekbrains.ru.translator.model.datasource.DataSourceRemote
+import geekbrains.ru.translator.model.data.DataModel
+import geekbrains.ru.translator.model.datasource.*
 import geekbrains.ru.translator.model.interactor.MainInteractor
+import geekbrains.ru.translator.model.repository.Repository
 import geekbrains.ru.translator.model.repository.RepositoryImplementation
 import geekbrains.ru.translator.rx.ISchedulerProvider
 import geekbrains.ru.translator.rx.SchedulerProvider
 import geekbrains.ru.translator.view.base.View
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.observers.DisposableObserver
 
 class MainPresenterImpl<T : AppState, V : View>(
     // Обратите внимание, что Интерактор мы создаём сразу в конструкторе
-    private val interactor: MainInteractor = MainInteractor(
-        RepositoryImplementation(DataSourceRemote()),
-        RepositoryImplementation(DataSourceLocal())
+    private val interactor: Interactor<AppState> = MainInteractor(
+        RepositoryImplementation( DataSourceRemote(RetrofitImplementation())),
+        RepositoryImplementation(DataSourceLocal(RoomDataBaseImplementation()))
     ),
     protected val compositeDisposable: CompositeDisposable = CompositeDisposable(),
     protected val schedulerProvider: ISchedulerProvider = SchedulerProvider()

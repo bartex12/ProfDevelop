@@ -2,7 +2,7 @@ package geekbrains.ru.translator.model.repository
 
 import io.reactivex.Observable
 
-interface Repository<T> {
+interface Repository<AppState> {
 
-    fun getData(word: String): Observable<T>
+    fun getData(word: String): Observable<AppState>
 }
