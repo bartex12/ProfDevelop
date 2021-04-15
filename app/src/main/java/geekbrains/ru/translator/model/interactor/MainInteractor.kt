@@ -1,4 +1,4 @@
-package geekbrains.ru.translator.view.main
+package geekbrains.ru.translator.model.interactor
 
 import com.anikin.aleksandr.simplevocabulary.viewmodel.Interactor
 import geekbrains.ru.translator.model.data.AppState
@@ -12,6 +12,8 @@ class MainInteractor(
 ) : Interactor<AppState> {
 
     override fun getData(word: String, fromRemoteSource: Boolean): Observable<AppState> {
+        //здесь можно описать какую то бизнес-логику, например,
+        // что слово должно состоять только из символов и другие правила
         return if (fromRemoteSource) {
             remoteRepository.getData(word).map { AppState.Success(it) }
         } else {

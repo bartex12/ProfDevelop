@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import geekbrains.ru.translator.R
 import geekbrains.ru.translator.model.data.AppState
 import geekbrains.ru.translator.model.data.DataModel
+import geekbrains.ru.translator.presenter.MainPresenterImpl
 import geekbrains.ru.translator.presenter.Presenter
 import geekbrains.ru.translator.view.base.BaseActivity
 import geekbrains.ru.translator.view.base.View
@@ -24,6 +25,7 @@ class MainActivity : BaseActivity<AppState>() {
             }
         }
 
+    // Создаём презентер и храним его в базовой Activity
     override fun createPresenter(): Presenter<AppState, View> {
         return MainPresenterImpl()
     }
@@ -42,7 +44,10 @@ class MainActivity : BaseActivity<AppState>() {
         }
     }
 
+    // Переопределяем базовый метод
     override fun renderData(appState: AppState) {
+        // В зависимости от состояния модели данных (загрузка, отображение,
+        // ошибка) отображаем соответствующий экран
         when (appState) {
             is AppState.Success -> {
                 val dataModel = appState.data
@@ -60,6 +65,8 @@ class MainActivity : BaseActivity<AppState>() {
             }
             is AppState.Loading -> {
                 showViewLoading()
+                // Задел на будущее, если понадобится отображать прогресс
+                // загрузки
                 if (appState.progress != null) {
                     progress_bar_horizontal.visibility = VISIBLE
                     progress_bar_round.visibility = GONE
@@ -102,6 +109,6 @@ class MainActivity : BaseActivity<AppState>() {
     }
 
     companion object {
-        private const val BOTTOM_SHEET_FRAGMENT_DIALOG_TAG = "74a54328-5d62-46bf-ab6b-cbf5fgt0-092395"
+        private const val BOTTOM_SHEET_FRAGMENT_DIALOG_TAG = "BOTTOM_SHEET_FRAGMENT_DIALOG_TAG_1"
     }
 }
