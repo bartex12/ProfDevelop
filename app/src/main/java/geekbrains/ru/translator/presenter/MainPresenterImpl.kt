@@ -51,24 +51,9 @@ class MainPresenterImpl<T : AppState, V : View>(
                 },{
                     currentView?.renderData(AppState.Error(it))
                 })
-            //subscribeWith мне привычнее заменить на subscribe
+            //subscribeWith мне привычнее заменить на subscribe, хотя с subscribeWith код чище
             //.subscribeWith(getObserver())
         )
     }
 
-//    private fun getObserver(): DisposableObserver<AppState> {
-//        return object : DisposableObserver<AppState>() {
-//
-//            override fun onNext(appState: AppState) {
-//                currentView?.renderData(appState)
-//            }
-//
-//            override fun onError(e: Throwable) {
-//                currentView?.renderData(AppState.Error(e))
-//            }
-//
-//            override fun onComplete() {
-//            }
-//        }
-//    }
 }
