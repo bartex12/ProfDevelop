@@ -7,7 +7,15 @@ import io.reactivex.Observable
 class RepositoryImplementation(private val dataSource: DataSource<List<DataModel>>) :
     Repository<List<DataModel>> {
 
+    private val cash = mutableMapOf<String, List<DataModel>>()
+
     override fun getData(word: String): Observable<List<DataModel>> {
-        return dataSource.getData(word)
+        if (cash.contains(word)){
+            return Observable.just(cash[word])
+        }else{
+            return dataSource.getData(word).doOnNext {
+                cash[word] = it
+            }
+        }
     }
 }

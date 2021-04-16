@@ -13,10 +13,11 @@ import geekbrains.ru.translator.view.base.View
 import io.reactivex.disposables.CompositeDisposable
 
 class MainPresenterImpl<T : AppState, V : View>(
-    // Обратите внимание, что Интерактор мы создаём сразу в конструкторе
+    // Интерактор мы создаём сразу в конструкторе
+    //создавая все зависимости - в MVVM это делаем во ViewModel
     private val interactor: Interactor<AppState> = MainInteractor(
-        RepositoryImplementation( DataSourceRemote(RetrofitImplementation())),
-        RepositoryImplementation(DataSourceLocal(RoomDataBaseImplementation()))
+        RepositoryImplementation( RetrofitImplementation()),
+        RepositoryImplementation(RoomDataBaseImplementation())
     ),
     protected val compositeDisposable: CompositeDisposable = CompositeDisposable(),
     protected val schedulerProvider: ISchedulerProvider = SchedulerProvider()
