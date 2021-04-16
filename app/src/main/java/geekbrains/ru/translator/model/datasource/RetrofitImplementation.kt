@@ -3,6 +3,7 @@ package geekbrains.ru.translator.model.datasource
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import geekbrains.ru.translator.model.data.DataModel
 import io.reactivex.Observable
+import io.reactivex.Single
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -11,7 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class RetrofitImplementation : DataSource<List<DataModel>> {
 
-    override fun getData(word: String): Observable<List<DataModel>> {
+    override fun getData(word: String): Single<List<DataModel>> {
         return getService(BaseInterceptor.interceptor).search(word)
     }
 

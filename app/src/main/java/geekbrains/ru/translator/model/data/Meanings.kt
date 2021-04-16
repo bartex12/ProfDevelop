@@ -1,8 +1,14 @@
 package geekbrains.ru.translator.model.data
 
+import android.os.Parcelable
+import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 class Meanings(
-    @field:SerializedName("translation") val translation: Translation?,
-    @field:SerializedName("imageUrl") val imageUrl: String?
-)
+    @Expose val translation: Translation?,
+    @Expose  val imageUrl: String?,
+    @Expose  val transcription: String?,
+    @Expose  val soundUrl: String?
+):Parcelable
