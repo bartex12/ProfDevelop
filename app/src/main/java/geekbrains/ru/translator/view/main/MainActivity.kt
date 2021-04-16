@@ -1,11 +1,13 @@
 package geekbrains.ru.translator.view.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import geekbrains.ru.translator.R
+import geekbrains.ru.translator.constants.Constants.Companion.DATA_MODEL
 import geekbrains.ru.translator.model.data.AppState
 import geekbrains.ru.translator.model.data.DataModel
 import geekbrains.ru.translator.presenter.MainPresenterImpl
@@ -21,6 +23,10 @@ class MainActivity : BaseActivity<AppState>() {
     private val onListItemClickListener: MainAdapter.OnListItemClickListener =
         object : MainAdapter.OnListItemClickListener {
             override fun onItemClick(data: DataModel) {
+
+                val intent = Intent(this@MainActivity, DetailActivity::class.java)
+                intent.putExtra(DATA_MODEL, data)
+                startActivity(intent)
                 Toast.makeText(this@MainActivity, data.text, Toast.LENGTH_SHORT).show()
             }
         }
