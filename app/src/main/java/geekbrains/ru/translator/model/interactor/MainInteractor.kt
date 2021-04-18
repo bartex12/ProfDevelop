@@ -1,12 +1,9 @@
 package geekbrains.ru.translator.model.interactor
 
-import com.anikin.aleksandr.simplevocabulary.viewmodel.Interactor
-import geekbrains.ru.translator.dagger.NAME_LOCAL
 import geekbrains.ru.translator.dagger.NAME_REMOTE
 import geekbrains.ru.translator.model.data.AppState
 import geekbrains.ru.translator.model.data.DataModel
 import geekbrains.ru.translator.model.repository.Repository
-import io.reactivex.Observable
 import io.reactivex.Single
 import javax.inject.Inject
 import javax.inject.Named

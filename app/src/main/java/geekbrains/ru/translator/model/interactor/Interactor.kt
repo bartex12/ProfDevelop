@@ -1,6 +1,5 @@
-package com.anikin.aleksandr.simplevocabulary.viewmodel
+package geekbrains.ru.translator.model.interactor
 
-import io.reactivex.Observable
 import io.reactivex.Single
 
 interface Interactor<T> {
