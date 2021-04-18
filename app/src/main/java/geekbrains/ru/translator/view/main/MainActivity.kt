@@ -4,22 +4,26 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import geekbrains.ru.translator.R
 import geekbrains.ru.translator.constants.Constants.Companion.DATA_MODEL
 import geekbrains.ru.translator.model.data.AppState
 import geekbrains.ru.translator.model.data.DataModel
-import geekbrains.ru.translator.presenter.MainPresenterImpl
-import geekbrains.ru.translator.presenter.Presenter
 import geekbrains.ru.translator.view.base.BaseActivity
-import geekbrains.ru.translator.view.base.View
 import geekbrains.ru.translator.view.main.adapter.MainAdapter
+import geekbrains.ru.translator.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : BaseActivity<AppState>() {
+class MainActivity() : BaseActivity<AppState>() {
+
+    override val model: MainViewModel by lazy {
+        ViewModelProvider.NewInstanceFactory().create(MainViewModel::class.java)
+    }
 
     private var adapter: MainAdapter? = null
+
     private val onListItemClickListener: MainAdapter.OnListItemClickListener =
         object : MainAdapter.OnListItemClickListener {
             override fun onItemClick(data: DataModel) {
@@ -27,23 +31,21 @@ class MainActivity : BaseActivity<AppState>() {
                 val intent = Intent(this@MainActivity, DetailActivity::class.java)
                 intent.putExtra(DATA_MODEL, data)
                 startActivity(intent)
-                Toast.makeText(this@MainActivity, data.text, Toast.LENGTH_SHORT).show()
             }
         }
-
-    // Создаём презентер и храним его в базовой Activity
-    override fun createPresenter(): Presenter<AppState, View> {
-        return MainPresenterImpl()
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         search_fab.setOnClickListener {
+
             val searchDialogFragment = SearchDialogFragment.newInstance()
+
             searchDialogFragment.setOnSearchClickListener(object : SearchDialogFragment.OnSearchClickListener {
                 override fun onClick(searchWord: String) {
-                    presenter.getData(searchWord, true)
+                    model.getData(searchWord, true)
+                        .observe(this@MainActivity, Observer {renderData(it)})
                 }
             })
             searchDialogFragment.show(supportFragmentManager, BOTTOM_SHEET_FRAGMENT_DIALOG_TAG)
@@ -92,7 +94,8 @@ class MainActivity : BaseActivity<AppState>() {
         showViewError()
         error_textview.text = error ?: getString(R.string.undefined_error)
         reload_button.setOnClickListener {
-            presenter.getData("hi", true)
+            model.getData("hi", true)
+                .observe(this@MainActivity, Observer {renderData(it)})
         }
     }
 
