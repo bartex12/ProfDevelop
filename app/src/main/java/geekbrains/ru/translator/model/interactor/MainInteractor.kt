@@ -15,11 +15,6 @@ class MainInteractor@Inject constructor(
     @Named(NAME_REMOTE) val remoteRepository: Repository<List<DataModel>>,
     @Named(NAME_REMOTE) val localRepository: Repository<List<DataModel>>
   ) : Interactor<AppState> {
-/*    @Inject
-    @Named(NAME_REMOTE) lateinit var remoteRepository: Repository<List<DataModel>>
-
-    @Inject
-    @Named(NAME_LOCAL) lateinit var localRepository: Repository<List<DataModel>>*/
 
     override fun getData(word: String, fromRemoteSource: Boolean): Single<AppState> {
         //здесь можно описать какую то бизнес-логику, например,

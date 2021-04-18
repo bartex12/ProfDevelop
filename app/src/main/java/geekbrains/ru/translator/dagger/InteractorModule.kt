@@ -14,6 +14,7 @@ import javax.inject.Singleton
 class InteractorModule {
 
     @Provides
+    //@Singleton
     fun  provideInteractor(
         @Named(NAME_REMOTE) remoteRepository: Repository<List<DataModel>>,
         @Named(NAME_LOCAL)localRepository: Repository<List<DataModel>>): Interactor<AppState> =

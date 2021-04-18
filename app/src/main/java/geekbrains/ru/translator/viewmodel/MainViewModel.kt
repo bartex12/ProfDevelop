@@ -10,9 +10,10 @@ import geekbrains.ru.translator.model.repository.RepositoryImplementation
 import javax.inject.Inject
 
 class MainViewModel():BaseViewModel<AppState>() {
-//
+
 //    @Inject
 //    lateinit var interactor : Interactor<AppState>
+
 
     val interactor:Interactor<AppState> = MainInteractor(
         RepositoryImplementation(RetrofitImplementation()),
