@@ -1,9 +1,9 @@
 package geekbrains.ru.translator.model.repository
 
-import io.reactivex.Observable
+import geekbrains.ru.translator.model.data.DataModel
 import io.reactivex.Single
 
-interface Repository<AppState> {
+interface Repository<T> {
 
-    fun getData(word: String): Single<AppState>
+    fun getData(word: String): Single<List<DataModel>>
 }

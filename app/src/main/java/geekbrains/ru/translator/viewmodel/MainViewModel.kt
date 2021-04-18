@@ -7,13 +7,16 @@ import geekbrains.ru.translator.model.datasource.RetrofitImplementation
 import geekbrains.ru.translator.model.datasource.RoomDataBaseImplementation
 import geekbrains.ru.translator.model.interactor.MainInteractor
 import geekbrains.ru.translator.model.repository.RepositoryImplementation
+import javax.inject.Inject
 
-class MainViewModel(
+class MainViewModel():BaseViewModel<AppState>() {
+//
+//    @Inject
+//    lateinit var interactor : Interactor<AppState>
+
     val interactor:Interactor<AppState> = MainInteractor(
         RepositoryImplementation(RetrofitImplementation()),
-        RepositoryImplementation(RoomDataBaseImplementation())
-    )
-):BaseViewModel<AppState>() {
+        RepositoryImplementation(RoomDataBaseImplementation()))
 
     override fun getData(word: String, isOnline: Boolean): LiveData<AppState> {
         compositeDisposable.add(

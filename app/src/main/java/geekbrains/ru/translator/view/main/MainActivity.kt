@@ -7,6 +7,7 @@ import android.view.View.VISIBLE
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import geekbrains.ru.translator.App
 import geekbrains.ru.translator.R
 import geekbrains.ru.translator.constants.Constants.Companion.DATA_MODEL
 import geekbrains.ru.translator.model.data.AppState
@@ -18,10 +19,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity() : BaseActivity<AppState>() {
 
-    override val model: MainViewModel by lazy {
-        ViewModelProvider.NewInstanceFactory().create(MainViewModel::class.java)
-    }
-
+    override lateinit var model: MainViewModel
     private var adapter: MainAdapter? = null
 
     private val onListItemClickListener: MainAdapter.OnListItemClickListener =
@@ -37,6 +35,11 @@ class MainActivity() : BaseActivity<AppState>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        model =  ViewModelProvider.NewInstanceFactory().create(MainViewModel::class.java)
+        model.apply {
+            App.instance.appComponent.inject(this)
+        }
 
         search_fab.setOnClickListener {
 

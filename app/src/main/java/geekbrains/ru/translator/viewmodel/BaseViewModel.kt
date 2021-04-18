@@ -12,10 +12,12 @@ import io.reactivex.disposables.CompositeDisposable
 //  GeekBrains заколебал уже своими абстракциями
 //очередной вынос мозга безо всяких видимых причин, да ещё Даггер этот идиотский
 abstract class BaseViewModel<T:AppState> (
-    protected val liveDataForViewToObserve: MutableLiveData<T> = MutableLiveData(),
-    protected val compositeDisposable:CompositeDisposable = CompositeDisposable(),
-    protected val schedulerProvider: SchedulerProvider = SchedulerProvider()
+
 ): ViewModel(){
+
+    protected val liveDataForViewToObserve: MutableLiveData<T> = MutableLiveData()
+    protected val compositeDisposable:CompositeDisposable = CompositeDisposable()
+    protected val schedulerProvider: SchedulerProvider = SchedulerProvider()
 
     open fun getData(word: String, isOnline: Boolean):LiveData<T>{
         return liveDataForViewToObserve

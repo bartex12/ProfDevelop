@@ -1,12 +1,18 @@
 package geekbrains.ru.translator.model.repository
 
 import android.util.Log
+import geekbrains.ru.translator.dagger.NAME_LOCAL
+import geekbrains.ru.translator.dagger.NAME_LOCAL_2
+import geekbrains.ru.translator.dagger.NAME_REMOTE
+import geekbrains.ru.translator.dagger.NAME_REMOTE_2
 import geekbrains.ru.translator.model.data.DataModel
 import geekbrains.ru.translator.model.datasource.DataSource
 import io.reactivex.Observable
 import io.reactivex.Single
+import javax.inject.Inject
+import javax.inject.Named
 
-class RepositoryImplementation(private val dataSource: DataSource<List<DataModel>>) :
+class RepositoryImplementation @Inject constructor(val dataSource:DataSource<List<DataModel>>) :
     Repository<List<DataModel>> {
 
     companion object{
