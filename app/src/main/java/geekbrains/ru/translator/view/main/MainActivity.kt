@@ -49,12 +49,14 @@ class MainActivity() : BaseActivity<AppState>() {
 
             searchDialogFragment.setOnSearchClickListener(object : SearchDialogFragment.OnSearchClickListener {
                 override fun onClick(searchWord: String) {
+                    //только делаем запрос без подписки
                     model.getData(searchWord, true)
-                        .observe(this@MainActivity, Observer {renderData(it)})
                 }
             })
             searchDialogFragment.show(supportFragmentManager, BOTTOM_SHEET_FRAGMENT_DIALOG_TAG)
         }
+        //подписываемся на изменение данных
+       model.getResult().observe(this, Observer {renderData(it)})
     }
 
     // Переопределяем базовый метод
@@ -99,8 +101,8 @@ class MainActivity() : BaseActivity<AppState>() {
         showViewError()
         error_textview.text = error ?: getString(R.string.undefined_error)
         reload_button.setOnClickListener {
+            //только делаем запрос без подписки - подписка была в onCreate
             model.getData("hi", true)
-                .observe(this@MainActivity, Observer {renderData(it)})
         }
     }
 

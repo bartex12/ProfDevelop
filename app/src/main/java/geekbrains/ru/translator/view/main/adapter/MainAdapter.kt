@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import geekbrains.ru.translator.R
 import geekbrains.ru.translator.model.data.DataModel
+import geekbrains.ru.translator.model.data.Meanings
 import kotlinx.android.synthetic.main.activity_main_recyclerview_item.view.*
 
 class MainAdapter(private var onListItemClickListener: OnListItemClickListener, private var data: List<DataModel>) :
@@ -36,18 +37,26 @@ class MainAdapter(private var onListItemClickListener: OnListItemClickListener, 
         fun bind(data: DataModel) {
             if (layoutPosition != RecyclerView.NO_POSITION) {
                 itemView.header_textview_recycler_item.text = data.text
-                itemView.description_textview_recycler_item.text = data.meanings?.get(0)?.translation?.text
+                itemView.description_textview_recycler_item.text = convertMeaningsToString (data.meanings!!)
 
-                itemView.setOnClickListener { openInNewWindow(data) }
+                itemView.setOnClickListener {  onListItemClickListener.onItemClick(data) }
             }
         }
     }
 
-    private fun openInNewWindow(listItemData: DataModel) {
-        onListItemClickListener.onItemClick(listItemData)
-    }
-
     interface OnListItemClickListener {
         fun onItemClick(data: DataModel)
+    }
+
+    fun convertMeaningsToString(meanings: List<Meanings>): String {
+        var meaningsSeparatedByComma = ""
+        for ((index, meaning) in meanings.withIndex()) {
+            meaningsSeparatedByComma += if (index + 1 != meanings.size) {
+                String.format("%s%s", meaning.translation?.text, ", ")
+            } else {
+                meaning.translation?.text
+            }
+        }
+        return meaningsSeparatedByComma
     }
 }
