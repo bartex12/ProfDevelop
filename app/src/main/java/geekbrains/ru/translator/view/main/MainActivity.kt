@@ -12,6 +12,7 @@ import geekbrains.ru.translator.application.TranslatorApp
 import geekbrains.ru.translator.constants.Constants.Companion.DATA_MODEL
 import geekbrains.ru.translator.model.data.AppState
 import geekbrains.ru.translator.model.data.DataModel
+import geekbrains.ru.translator.utils.network.isOnline
 import geekbrains.ru.translator.view.base.BaseActivity
 import geekbrains.ru.translator.view.main.adapter.MainAdapter
 import geekbrains.ru.translator.viewmodel.MainViewModel
@@ -20,13 +21,17 @@ import javax.inject.Inject
 
 class MainActivity() : BaseActivity<AppState>() {
 
+    companion object {
+        private const val BOTTOM_SHEET_FRAGMENT_DIALOG_TAG = "BOTTOM_SHEET_FRAGMENT_DIALOG_TAG_1"
+    }
+
     @Inject
     internal lateinit var viewModelFactory: ViewModelProvider.Factory
 
     override  val model: MainViewModel by lazy {
         viewModelFactory. create(MainViewModel::class.java)
     }
-    private var adapter: MainAdapter? = null
+    private val adapter: MainAdapter by lazy { MainAdapter(onListItemClickListener) }
 
     private val onListItemClickListener: MainAdapter.OnListItemClickListener =
         object : MainAdapter.OnListItemClickListener {
@@ -44,19 +49,25 @@ class MainActivity() : BaseActivity<AppState>() {
         setContentView(R.layout.activity_main)
 
         search_fab.setOnClickListener {
-
             val searchDialogFragment = SearchDialogFragment.newInstance()
-
             searchDialogFragment.setOnSearchClickListener(object : SearchDialogFragment.OnSearchClickListener {
                 override fun onClick(searchWord: String) {
                     //только делаем запрос без подписки
-                    model.getData(searchWord, true)
+                    isNetworkAvailable = isOnline(applicationContext)
+                    if (isNetworkAvailable) {
+                        model.getData(searchWord, isNetworkAvailable)
+                    } else {
+                        showNoInternetConnectionDialog()
+                    }
                 }
             })
             searchDialogFragment.show(supportFragmentManager, BOTTOM_SHEET_FRAGMENT_DIALOG_TAG)
         }
         //подписываемся на изменение данных
        model.getResult().observe(this, Observer {renderData(it)})
+
+        main_activity_recyclerview.layoutManager = LinearLayoutManager(applicationContext)
+        main_activity_recyclerview.adapter = adapter
     }
 
     // Переопределяем базовый метод
@@ -65,17 +76,15 @@ class MainActivity() : BaseActivity<AppState>() {
         // ошибка) отображаем соответствующий экран
         when (appState) {
             is AppState.Success -> {
-                val dataModel = appState.data
-                if (dataModel == null || dataModel.isEmpty()) {
-                    showErrorScreen(getString(R.string.empty_server_response_on_success))
+                showViewSuccess()
+                val data = appState.data
+                if (data.isNullOrEmpty()) {
+                    showAlertDialog(
+                        getString(R.string.dialog_tittle_sorry),
+                        getString(R.string.empty_server_response_on_success)
+                    )
                 } else {
-                    showViewSuccess()
-                    if (adapter == null) {
-                        main_activity_recyclerview.layoutManager = LinearLayoutManager(applicationContext)
-                        main_activity_recyclerview.adapter = MainAdapter(onListItemClickListener, dataModel)
-                    } else {
-                        adapter!!.setData(dataModel)
-                    }
+                    adapter.setData(data)
                 }
             }
             is AppState.Loading -> {
@@ -92,39 +101,20 @@ class MainActivity() : BaseActivity<AppState>() {
                 }
             }
             is AppState.Error -> {
-                showErrorScreen(appState.error.message)
+                showViewSuccess()
+                showAlertDialog(getString(R.string.error_stub), appState.error.message)
             }
-        }
-    }
-
-    private fun showErrorScreen(error: String?) {
-        showViewError()
-        error_textview.text = error ?: getString(R.string.undefined_error)
-        reload_button.setOnClickListener {
-            //только делаем запрос без подписки - подписка была в onCreate
-            model.getData("hi", true)
         }
     }
 
     private fun showViewSuccess() {
         success_linear_layout.visibility = VISIBLE
         loading_frame_layout.visibility = GONE
-        error_linear_layout.visibility = GONE
     }
 
     private fun showViewLoading() {
         success_linear_layout.visibility = GONE
         loading_frame_layout.visibility = VISIBLE
-        error_linear_layout.visibility = GONE
     }
 
-    private fun showViewError() {
-        success_linear_layout.visibility = GONE
-        loading_frame_layout.visibility = GONE
-        error_linear_layout.visibility = VISIBLE
-    }
-
-    companion object {
-        private const val BOTTOM_SHEET_FRAGMENT_DIALOG_TAG = "BOTTOM_SHEET_FRAGMENT_DIALOG_TAG_1"
-    }
 }

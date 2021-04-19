@@ -4,11 +4,7 @@ import androidx.lifecycle.LiveData
 import geekbrains.ru.translator.model.data.AppState
 import geekbrains.ru.translator.model.data.DataModel
 import geekbrains.ru.translator.model.data.Meanings
-import geekbrains.ru.translator.model.datasource.RetrofitImplementation
-import geekbrains.ru.translator.model.datasource.RoomDataBaseImplementation
-import geekbrains.ru.translator.model.interactor.Interactor
 import geekbrains.ru.translator.model.interactor.MainInteractor
-import geekbrains.ru.translator.model.repository.RepositoryImplementation
 import javax.inject.Inject
 
 
