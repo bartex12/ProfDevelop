@@ -7,6 +7,6 @@ import io.reactivex.Single
 class RoomDataBaseImplementation : DataSource<List<DataModel>> {
 
     override fun getData(word: String): Single<List<DataModel>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+       return Single.just(listOf())
     }
 }
