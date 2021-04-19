@@ -13,7 +13,8 @@ import javax.inject.Named
 class InteractorModule {
 
     @Provides
-    //@Singleton
+    //@Singleton не нужно, так как каждый раз когда будет создаваться новая ViewModel
+    //будет создаваться интерактор
     fun  provideInteractor(
         @Named(NAME_REMOTE) remoteRepository: Repository<List<DataModel>>,
         @Named(NAME_LOCAL)localRepository: Repository<List<DataModel>>): Interactor<AppState> =

@@ -9,19 +9,10 @@ import geekbrains.ru.translator.model.interactor.MainInteractor
 import geekbrains.ru.translator.model.repository.RepositoryImplementation
 import javax.inject.Inject
 
-class MainViewModel (
-    val interactor: Interactor<AppState> = MainInteractor(
-        RepositoryImplementation(RetrofitImplementation()),
-        RepositoryImplementation(RoomDataBaseImplementation()))
-    )
-    :BaseViewModel<AppState>() {
 
-//    @Inject
-//    lateinit var interactor : Interactor<AppState>
+class MainViewModel @Inject constructor(private val interactor: MainInteractor) :
+    BaseViewModel<AppState>() {
 
-//    val interactor: Interactor<AppState> = MainInteractor(
-//        RepositoryImplementation(RetrofitImplementation()),
-//        RepositoryImplementation(RoomDataBaseImplementation()))
 
     override fun getData(word: String, isOnline: Boolean): LiveData<AppState> {
         compositeDisposable.add(

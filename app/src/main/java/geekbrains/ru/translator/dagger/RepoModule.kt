@@ -18,14 +18,16 @@ class RepoModule {
     @Provides
     @Singleton
     @Named(NAME_REMOTE)
-    fun provideDataSourceRemote(dataSourceRemote:DataSource<List<DataModel>>)
+    fun provideDataSourceRemote(
+        @Named(NAME_REMOTE) dataSourceRemote:DataSource<List<DataModel>>)
             : Repository<List<DataModel>> =
         RepositoryImplementation(dataSourceRemote)
 
     @Provides
     @Singleton
     @Named(NAME_LOCAL)
-    fun provideDataSourceLocal(dataSourceLocal:DataSource<List<DataModel>>)
+    fun provideDataSourceLocal(
+        @Named(NAME_LOCAL) dataSourceLocal:DataSource<List<DataModel>>)
             : Repository<List<DataModel>> = RepositoryImplementation(dataSourceLocal)
 
     @Provides
@@ -38,5 +40,6 @@ class RepoModule {
     @Singleton
     @Named(NAME_LOCAL)
     internal fun provideDataSourceLocal(): DataSource<List<DataModel>> = RoomDataBaseImplementation()
+ //создание интерфейса  - 1.20 вебинара
 }
 
