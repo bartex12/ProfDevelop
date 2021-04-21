@@ -23,9 +23,8 @@ class MainActivity() : BaseActivity<AppState>() {
         private const val BOTTOM_SHEET_FRAGMENT_DIALOG_TAG = "BOTTOM_SHEET_FRAGMENT_DIALOG_TAG_1"
     }
 
-//    @Inject
-//    internal lateinit var viewModelFactory: ViewModelProvider.Factory
-
+    // Теперь ViewModel инициализируется через функцию by viewModel()
+    // Это функция, предоставляемая Koin из коробки
     //c Koin так просто происходит инжекция viewModel
     override  val model by viewModel<MainViewModel>()
 

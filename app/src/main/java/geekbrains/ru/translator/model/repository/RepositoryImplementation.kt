@@ -5,7 +5,7 @@ import geekbrains.ru.translator.model.data.DataModel
 import geekbrains.ru.translator.model.datasource.DataSource
 import io.reactivex.Single
 
-class RepositoryImplementation /*@Inject constructor*/(val dataSource:DataSource<List<DataModel>>) :
+class RepositoryImplementation (val dataSource:DataSource<List<DataModel>>) :
     Repository<List<DataModel>> {
 
     companion object{

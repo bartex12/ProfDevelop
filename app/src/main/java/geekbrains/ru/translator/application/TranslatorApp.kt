@@ -10,6 +10,7 @@ class TranslatorApp : Application() {
     override fun onCreate() {
         super.onCreate()
 
+        //Инициализируем Koin в приложении:
         startKoin {
             modules(listOf(application, mainScreen))
         }
