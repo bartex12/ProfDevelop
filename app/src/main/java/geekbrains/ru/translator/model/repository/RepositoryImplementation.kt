@@ -4,9 +4,8 @@ import android.util.Log
 import geekbrains.ru.translator.model.data.DataModel
 import geekbrains.ru.translator.model.datasource.DataSource
 import io.reactivex.Single
-import javax.inject.Inject
 
-class RepositoryImplementation @Inject constructor(val dataSource:DataSource<List<DataModel>>) :
+class RepositoryImplementation /*@Inject constructor*/(val dataSource:DataSource<List<DataModel>>) :
     Repository<List<DataModel>> {
 
     companion object{

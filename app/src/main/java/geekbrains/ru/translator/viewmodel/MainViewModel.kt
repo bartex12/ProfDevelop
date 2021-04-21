@@ -5,10 +5,9 @@ import geekbrains.ru.translator.model.data.AppState
 import geekbrains.ru.translator.model.data.DataModel
 import geekbrains.ru.translator.model.data.Meanings
 import geekbrains.ru.translator.model.interactor.MainInteractor
-import javax.inject.Inject
 
 
-class MainViewModel @Inject constructor(private val interactor: MainInteractor) :
+class MainViewModel /*@Inject constructor*/(private val interactor: MainInteractor) :
     BaseViewModel<AppState>() {
 
     fun getResult():LiveData<AppState>{

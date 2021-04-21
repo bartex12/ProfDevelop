@@ -1,19 +1,18 @@
 package geekbrains.ru.translator.application
 
 import android.app.Application
-import geekbrains.ru.translator.dagger.AppComponent
-import geekbrains.ru.translator.dagger.DaggerAppComponent
+import geekbrains.ru.translator.koin.application
+import geekbrains.ru.translator.koin.mainScreen
+import org.koin.core.context.startKoin
 
 class TranslatorApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        val component =
-            DaggerAppComponent.builder().appContext(this) .build()
-        TranslatorApp.component = component
+
+        startKoin {
+            modules(listOf(application, mainScreen))
+        }
     }
 
-    companion object{
-        lateinit var component:AppComponent
-    }
 }
