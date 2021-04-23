@@ -1,11 +1,8 @@
 package geekbrains.ru.translator.viewmodel
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import geekbrains.ru.translator.model.data.AppState
-import geekbrains.ru.translator.rx.SchedulerProvider
-import io.reactivex.disposables.CompositeDisposable
 import kotlinx.coroutines.*
 
 abstract class BaseViewModel<T:AppState> (

@@ -5,9 +5,7 @@ import geekbrains.ru.translator.model.data.AppState
 import geekbrains.ru.translator.model.data.DataModel
 import geekbrains.ru.translator.model.data.Meanings
 import geekbrains.ru.translator.model.interactor.MainInteractor
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 
 class MainViewModel (private val interactor: MainInteractor) :
@@ -19,6 +17,7 @@ class MainViewModel (private val interactor: MainInteractor) :
     fun getResult():LiveData<AppState>{
         return liveDataForViewToObserve
     }
+
 
     override fun getData(word: String, isOnline: Boolean) {
         //показываем крутилку прогресса
@@ -34,10 +33,11 @@ class MainViewModel (private val interactor: MainInteractor) :
     // операций), хотя это и не обязательно указывать явно, потому что Retrofit
     // и так делает это благодаря CoroutineCallAdapterFactory(). Это же касается и Room
     private suspend fun startInteractor(word: String, online: Boolean) {
-        withContext(Dispatchers.IO){
-            //если бы не парсить , то было бы  .postValue(interactor.getData(word, online))
-            _liveDataForViewToObserve.postValue(parseResults(interactor.getData(word, online)))
-        }
+        _liveDataForViewToObserve.postValue(parseResults(interactor.getData(word, online)))
+//        withContext(Dispatchers.IO){
+//            //если бы не парсить , то было бы  .postValue(interactor.getData(word, online))
+//            _liveDataForViewToObserve.postValue(parseResults(interactor.getData(word, online)))
+//        }
     }
 
     private fun  parseResults(appState:AppState):AppState{
@@ -78,6 +78,7 @@ class MainViewModel (private val interactor: MainInteractor) :
 
     //неочевидная вещь
     override fun onCleared() {
+        //до super.onCleared() в котором  cancelJob() - завершаются все корутины
         _liveDataForViewToObserve.value = AppState.Success(null)
         super.onCleared()
     }
