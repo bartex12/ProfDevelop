@@ -7,6 +7,8 @@ import com.squareup.picasso.Picasso
 import geekbrains.ru.translator.R
 import geekbrains.ru.translator.constants.Constants.Companion.DATA_MODEL
 import geekbrains.ru.translator.model.data.DataModel
+import geekbrains.ru.translator.utils.network.isOnline
+import geekbrains.ru.translator.utils.ui.AlertDialogFragment
 import kotlinx.android.synthetic.main.activity_detail.*
 
 class DetailActivity : AppCompatActivity() {
@@ -24,8 +26,9 @@ class DetailActivity : AppCompatActivity() {
         tv_text.text =  dataModel?.text?:""
         tv_transcription.text = dataModel?.meanings?.get(0)?.transcription?:""
         tv_translation.text = dataModel?.meanings?.get(0)?.translation?.text?:""
+        
         val soundUrl = dataModel?.meanings?.get(0)?.soundUrl
-
+        Log.d(TAG, "DetailActivity onCreate soundUrl = $soundUrl")
         val imageUrl = dataModel?.meanings?.get(0)?.imageUrl
         Log.d(TAG, "DetailActivity onCreate imageUrl = $imageUrl")
 
@@ -43,5 +46,7 @@ class DetailActivity : AppCompatActivity() {
                 videoView_sound.start()
             }
         }
+
     }
+
 }

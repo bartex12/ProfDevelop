@@ -11,7 +11,7 @@ import geekbrains.ru.translator.utils.ui.AlertDialogFragment
 abstract class BaseActivity<T : AppState> : AppCompatActivity() {
 
     companion object {
-        private const val DIALOG_FRAGMENT_TAG = "DIALOG_FRAGMENT_TAG"
+       const val DIALOG_FRAGMENT_TAG = "DIALOG_FRAGMENT_TAG"
     }
 
     abstract val model:ViewModel
