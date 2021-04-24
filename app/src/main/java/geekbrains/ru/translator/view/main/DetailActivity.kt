@@ -26,7 +26,7 @@ class DetailActivity : AppCompatActivity() {
         tv_text.text =  dataModel?.text?:""
         tv_transcription.text = dataModel?.meanings?.get(0)?.transcription?:""
         tv_translation.text = dataModel?.meanings?.get(0)?.translation?.text?:""
-        
+
         val soundUrl = dataModel?.meanings?.get(0)?.soundUrl
         Log.d(TAG, "DetailActivity onCreate soundUrl = $soundUrl")
         val imageUrl = dataModel?.meanings?.get(0)?.imageUrl
