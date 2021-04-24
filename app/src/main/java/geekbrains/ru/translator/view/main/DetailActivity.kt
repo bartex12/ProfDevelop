@@ -87,7 +87,7 @@ class DetailActivity : AppCompatActivity() {
                     override fun onError(e: Exception?) {
                         stopRefreshAnimationIfNeeded()
                     }
-                }) 
+                })
         }
 
         buttonSound.setOnClickListener {

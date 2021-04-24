@@ -2,23 +2,24 @@ package geekbrains.ru.translator.view.main
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View.GONE
-import android.view.View.VISIBLE
-import android.widget.Toast
+import android.view.Menu
+import android.view.MenuItem
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import geekbrains.ru.translator.R
 import geekbrains.ru.translator.constants.Constants.Companion.DATA_MODEL
 import geekbrains.ru.translator.model.data.AppState
 import geekbrains.ru.translator.model.data.DataModel
+import geekbrains.ru.translator.model.interactor.MainInteractor
 import geekbrains.ru.translator.utils.network.isOnline
 import geekbrains.ru.translator.view.base.BaseActivity
+import geekbrains.ru.translator.view.history.HistoryActivity
 import geekbrains.ru.translator.view.main.adapter.MainAdapter
 import geekbrains.ru.translator.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class MainActivity() : BaseActivity<AppState>() {
+class MainActivity() : BaseActivity<AppState, MainInteractor>() {
 
     companion object {
         private const val BOTTOM_SHEET_FRAGMENT_DIALOG_TAG = "BOTTOM_SHEET_FRAGMENT_DIALOG_TAG_1"
@@ -68,51 +69,22 @@ class MainActivity() : BaseActivity<AppState>() {
         main_activity_recyclerview.adapter = adapter
     }
 
-    // Переопределяем базовый метод
-    override fun renderData(appState: AppState) {
-        // В зависимости от состояния модели данных (загрузка, отображение,
-        // ошибка) отображаем соответствующий экран
-        when (appState) {
-            is AppState.Success -> {
-                showViewSuccess()
-                val data = appState.data
-                if (data.isNullOrEmpty()) {
-                    showAlertDialog(
-                        getString(R.string.dialog_tittle_sorry),
-                        getString(R.string.empty_server_response_on_success)
-                    )
-                } else {
-                    adapter.setData(data)
-                }
+    override fun setDataToAdapter(data: List<DataModel>) {
+        adapter.setData(data)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.history_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_history -> {
+                startActivity(Intent(this, HistoryActivity::class.java))
+                true
             }
-            is AppState.Loading -> {
-                showViewLoading()
-                // Задел на будущее, если понадобится отображать прогресс
-                // загрузки
-                if (appState.progress != null) {
-                    progress_bar_horizontal.visibility = VISIBLE
-                    progress_bar_round.visibility = GONE
-                    progress_bar_horizontal.progress = appState.progress
-                } else {
-                    progress_bar_horizontal.visibility = GONE
-                    progress_bar_round.visibility = VISIBLE
-                }
-            }
-            is AppState.Error -> {
-                showViewSuccess()
-                showAlertDialog(getString(R.string.error_stub), appState.error.message)
-            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
-
-    private fun showViewSuccess() {
-        success_linear_layout.visibility = VISIBLE
-        loading_frame_layout.visibility = GONE
-    }
-
-    private fun showViewLoading() {
-        success_linear_layout.visibility = GONE
-        loading_frame_layout.visibility = VISIBLE
-    }
-
 }
