@@ -1,12 +1,10 @@
 package geekbrains.ru.translator.model.datasource
 
 import geekbrains.ru.translator.model.data.DataModel
-import io.reactivex.Observable
-import io.reactivex.Single
 
+//потом видимо результат из базы данных будет возвращаться в виде Deferred и нужно будет добавить await()
 class RoomDataBaseImplementation : DataSource<List<DataModel>> {
-
-    override fun getData(word: String): Single<List<DataModel>> {
-       return Single.just(listOf())
+    override suspend fun getData(word: String): List<DataModel> {
+       return listOf()
     }
 }

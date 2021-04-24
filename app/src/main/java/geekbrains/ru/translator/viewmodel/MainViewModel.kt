@@ -5,37 +5,42 @@ import geekbrains.ru.translator.model.data.AppState
 import geekbrains.ru.translator.model.data.DataModel
 import geekbrains.ru.translator.model.data.Meanings
 import geekbrains.ru.translator.model.interactor.MainInteractor
-import javax.inject.Inject
+import kotlinx.coroutines.launch
 
 
-class MainViewModel @Inject constructor(private val interactor: MainInteractor) :
+class MainViewModel (private val interactor: MainInteractor) :
     BaseViewModel<AppState>() {
+
+    //не понял, зачем копируем переменную из базового класса
+    private val liveDataForViewToObserve:LiveData<AppState> = _liveDataForViewToObserve
 
     fun getResult():LiveData<AppState>{
         return liveDataForViewToObserve
     }
 
 
-    override fun getData(word: String, isOnline: Boolean): LiveData<AppState> {
-        compositeDisposable.add(
-            interactor.getData(word, isOnline)
-                .subscribeOn(schedulerProvider.io())
-                .observeOn(schedulerProvider.ui())
-                //в момент подписки запускаем Loading - в MVVM кладём Loading в value
-                .doOnSubscribe {
-                    liveDataForViewToObserve.value = AppState.Loading(null)}
-                .subscribe ({
-                    liveDataForViewToObserve.value = parseResults(it)
-                },{error->
-                    liveDataForViewToObserve.value = AppState.Error(error)
-                })
-            //subscribeWith мне привычнее заменить на subscribe, хотя с subscribeWith код чище
-            //.subscribeWith(getObserver())
-        )
-        return liveDataForViewToObserve  //это то же что и return super.getData(word, isOnline)
+    override fun getData(word: String, isOnline: Boolean) {
+        //показываем крутилку прогресса
+        _liveDataForViewToObserve.value = AppState.Loading(null)
+        //останавливаем запущенные корутины, так как они уже не нужны при запросе новых данных
+        cancelJob()
+        // Запускаем корутину для асинхронного доступа к серверу с помощью  launch
+        viewModelCoroutineScope.launch {startInteractor(word, isOnline)}
+    }
+    // Добавляем suspend
+    // withContext(Dispatchers.IO) указывает, что доступ в сеть должен
+    // осуществляться через диспетчер IO (который предназначен именно для таких
+    // операций), хотя это и не обязательно указывать явно, потому что Retrofit
+    // и так делает это благодаря CoroutineCallAdapterFactory(). Это же касается и Room
+    private suspend fun startInteractor(word: String, online: Boolean) {
+        _liveDataForViewToObserve.postValue(parseResults(interactor.getData(word, online)))
+//        withContext(Dispatchers.IO){
+//            //если бы не парсить , то было бы  .postValue(interactor.getData(word, online))
+//            _liveDataForViewToObserve.postValue(parseResults(interactor.getData(word, online)))
+//        }
     }
 
-   private fun  parseResults(appState:AppState):AppState{
+    private fun  parseResults(appState:AppState):AppState{
        val results = arrayListOf<DataModel>()
        when(appState){
            is AppState.Success -> {
@@ -46,7 +51,6 @@ class MainViewModel @Inject constructor(private val interactor: MainInteractor) 
                        parseResult(searchResult, results)
                    }
                }
-
            }
        }
        return AppState.Success(results)
@@ -67,4 +71,15 @@ class MainViewModel @Inject constructor(private val interactor: MainInteractor) 
       }
   }
 
+    //вручную кладем ошибку из AppState
+    override fun handleError(error: Throwable) {
+        _liveDataForViewToObserve.postValue(AppState.Error(error))
+    }
+
+    //неочевидная вещь
+    override fun onCleared() {
+        //до super.onCleared() в котором  cancelJob() - завершаются все корутины
+        _liveDataForViewToObserve.value = AppState.Success(null)
+        super.onCleared()
+    }
 }

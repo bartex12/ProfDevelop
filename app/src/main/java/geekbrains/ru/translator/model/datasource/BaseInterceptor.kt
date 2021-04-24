@@ -3,6 +3,7 @@ package geekbrains.ru.translator.model.datasource
 import okhttp3.Interceptor
 import okhttp3.Response
 import java.io.IOException
+import kotlin.jvm.Throws
 
 /**
  * Custom interceptor to intercept basic responses and to show basic errors to the user

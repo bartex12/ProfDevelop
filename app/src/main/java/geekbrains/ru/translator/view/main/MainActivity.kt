@@ -4,11 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.widget.Toast
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import geekbrains.ru.translator.R
-import geekbrains.ru.translator.application.TranslatorApp
 import geekbrains.ru.translator.constants.Constants.Companion.DATA_MODEL
 import geekbrains.ru.translator.model.data.AppState
 import geekbrains.ru.translator.model.data.DataModel
@@ -17,7 +16,7 @@ import geekbrains.ru.translator.view.base.BaseActivity
 import geekbrains.ru.translator.view.main.adapter.MainAdapter
 import geekbrains.ru.translator.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
-import javax.inject.Inject
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity() : BaseActivity<AppState>() {
 
@@ -25,12 +24,11 @@ class MainActivity() : BaseActivity<AppState>() {
         private const val BOTTOM_SHEET_FRAGMENT_DIALOG_TAG = "BOTTOM_SHEET_FRAGMENT_DIALOG_TAG_1"
     }
 
-    @Inject
-    internal lateinit var viewModelFactory: ViewModelProvider.Factory
+    // Теперь ViewModel инициализируется через функцию by viewModel()
+    // Это функция, предоставляемая Koin из коробки
+    //c Koin так просто происходит инжекция viewModel
+    override  val model by viewModel<MainViewModel>()
 
-    override  val model: MainViewModel by lazy {
-        viewModelFactory. create(MainViewModel::class.java)
-    }
     private val adapter: MainAdapter by lazy { MainAdapter(onListItemClickListener) }
 
     private val onListItemClickListener: MainAdapter.OnListItemClickListener =
@@ -44,7 +42,7 @@ class MainActivity() : BaseActivity<AppState>() {
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        TranslatorApp.component.inject(this)
+        //TranslatorApp.component.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
