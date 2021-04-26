@@ -19,4 +19,6 @@
     <string name="empty_server_response_on_success">Ничего не удалось найти</string>
     <string name="dialog_tittle_sorry">Извините</string>
     <string name="error_stub">Ошибка</string>
+    <string name="menu_title_history">История</string>
+    <string name="history_name">History</string>
 </resources>

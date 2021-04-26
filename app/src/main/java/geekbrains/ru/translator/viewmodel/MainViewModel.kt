@@ -1,4 +1,4 @@
-package geekbrains.ru.translator.viewmodel
+ package geekbrains.ru.translator.viewmodel
 
 import androidx.lifecycle.LiveData
 import geekbrains.ru.translator.model.data.AppState
