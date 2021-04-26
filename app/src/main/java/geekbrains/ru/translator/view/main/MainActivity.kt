@@ -13,6 +13,7 @@ import geekbrains.ru.translator.model.data.DataModel
 import geekbrains.ru.translator.model.interactor.MainInteractor
 import geekbrains.ru.translator.utils.network.isOnline
 import geekbrains.ru.translator.view.base.BaseActivity
+import geekbrains.ru.translator.view.detail.DetailActivity
 import geekbrains.ru.translator.view.history.HistoryActivity
 import geekbrains.ru.translator.view.main.adapter.MainAdapter
 import geekbrains.ru.translator.viewmodel.MainViewModel

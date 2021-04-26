@@ -1,4 +1,4 @@
-package geekbrains.ru.translator.view.main
+package geekbrains.ru.translator.view.detail
 
 import android.os.Bundle
 import android.util.Log

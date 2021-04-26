@@ -1,4 +1,4 @@
-package geekbrains.ru.translator.view.history
+package geekbrains.ru.translator.view.history.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import geekbrains.ru.translator.R
 import geekbrains.ru.translator.model.data.DataModel
+import geekbrains.ru.translator.view.main.adapter.MainAdapter
 import kotlinx.android.synthetic.main.history_item.view.*
 
 class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.RecyclerItemViewHolder>() {
@@ -39,6 +40,7 @@ class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.RecyclerItemViewHolde
             if (layoutPosition != RecyclerView.NO_POSITION) {
                 itemView.tv_header_history.text = data.text
                 itemView.setOnClickListener {
+
                     Toast.makeText(itemView.context, "on click: ${data.text}", Toast.LENGTH_SHORT).show()
                 }
             }

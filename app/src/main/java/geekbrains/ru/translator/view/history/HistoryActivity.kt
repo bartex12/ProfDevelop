@@ -8,6 +8,7 @@ import geekbrains.ru.translator.model.data.AppState
 import geekbrains.ru.translator.model.data.DataModel
 import geekbrains.ru.translator.model.interactor.HistoryInteractor
 import geekbrains.ru.translator.view.base.BaseActivity
+import geekbrains.ru.translator.view.history.adapter.HistoryAdapter
 import geekbrains.ru.translator.viewmodel.HistoryViewModel
 import kotlinx.android.synthetic.main.activity_history.*
 import org.koin.android.viewmodel.ext.android.viewModel
