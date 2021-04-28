@@ -3,7 +3,6 @@ package geekbrains.ru.translator.model.repository
 import android.util.Log
 import geekbrains.ru.translator.model.data.DataModel
 import geekbrains.ru.translator.model.datasource.DataSource
-import io.reactivex.Single
 
 class RepositoryImplementation (private val dataSource:DataSource<List<DataModel>>) :
     Repository<List<DataModel>> {

@@ -4,7 +4,7 @@ import geekbrains.ru.translator.model.data.AppState
 import geekbrains.ru.translator.model.data.DataModel
 import geekbrains.ru.translator.model.repository.Repository
 import geekbrains.ru.translator.model.repository.RepositoryLocal
-import io.reactivex.Single
+
 
 class MainInteractor(
     private val remoteRepository: Repository<List<DataModel>>,
