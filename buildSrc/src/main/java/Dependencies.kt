@@ -38,27 +38,23 @@ object Versions {
    const val recyclerview = "1.2.0"
    //Swiperefreshlayout
    const val swiperefreshlayout = "1.1.0"
-   
+
    //Koin
    const val koinAndroid = "2.0.1"
    const val koinViewModel = "2.0.1"
 
-//   //Glide
-//   const val glide = "4.9.0"
-//   const val glideCompiler = "4.9.0"
-//
-//   //Picasso
-//   const val picasso = "2.5.2"
-//
-//   //Room
-//   const val roomKtx = "2.2.0-alpha01"
-//   const val runtime = "2.2.0-alpha01"
-//   const val roomCompiler = "2.2.0-alpha01"
-//
-//   //Test
-//   const val jUnit = "4.12"
-//   const val runner = "1.2.0"
-//   const val espressoCore = "3.2.0"
+   //Picasso
+   const val picasso = "2.71828"
+
+   //Room
+   const val roomKtx = "2.4.0-alpha01"
+   const val runtime = "2.4.0-alpha01"
+   const val roomCompiler = "2.4.0-alpha01"
+
+   //Test
+   const val jUnit = "4.13.1"
+   const val runner = "1.3.0"
+   const val espressoCore = "3.3.0"
 }
 
 object Kotlin {
@@ -98,23 +94,18 @@ object Koin {
    const val koin_view_model = "org.koin:koin-android-viewmodel:${Versions.koinViewModel}"
 }
 
-//object Glide {
-//   const val glide = "com.github.bumptech.glide:glide:${Versions.glide}"
-//   const val glide_compiler = "com.github.bumptech.glide:compiler:${Versions.glideCompiler}"
-//}
-//
-//object Picasso {
-//   const val picasso = "com.squareup.picasso:picasso:${Versions.picasso}"
-//}
-//
-//object Room {
-//   const val runtime = "androidx.room:room-runtime:${Versions.runtime}"
-//   const val compiler = "androidx.room:room-compiler:${Versions.roomCompiler}"
-//   const val room_ktx = "androidx.room:room-ktx:${Versions.roomKtx}"
-//}
-//
-//object TestImpl {
-//   const val junit = "junit:junit:${Versions.jUnit}"
-//   const val runner = "androidx.test:runner:${Versions.runner}"
-//   const val espresso = "androidx.test.espresso:espresso-core:${Versions.espressoCore}"
-//}
+object Picasso {
+   const val picasso = "com.squareup.picasso:picasso:${Versions.picasso}"
+}
+
+object Room {
+   const val runtime = "androidx.room:room-runtime:${Versions.runtime}"
+   const val compiler = "androidx.room:room-compiler:${Versions.roomCompiler}"
+   const val room_ktx = "androidx.room:room-ktx:${Versions.roomKtx}"
+}
+
+object TestImpl {
+   const val junit = "junit:junit:${Versions.jUnit}"
+   const val runner = "androidx.test:runner:${Versions.runner}"
+   const val espresso = "androidx.test.espresso:espresso-core:${Versions.espressoCore}"
+}
