@@ -22,10 +22,8 @@ object Versions {
    const val coroutinesCore = "1.4.1"
    const val coroutinesAndroid = "1.4.1"
 
-
 //   //Tools
 //   const val multidex = "1.0.3"
-//
 
    //Design
    const val appcompat = "1.2.0"
@@ -36,11 +34,15 @@ object Versions {
    const val converterGson = "2.7.1"
    const val interceptor = "3.12.1"
    const val adapterCoroutines = "0.9.2"
+   //Recyclerview
+   const val recyclerview = "1.2.0"
+   //Swiperefreshlayout
+   const val swiperefreshlayout = "1.1.0"
+   
+   //Koin
+   const val koinAndroid = "2.0.1"
+   const val koinViewModel = "2.0.1"
 
-//   //Koin
-//   const val koinAndroid = "2.0.1"
-//   const val koinViewModel = "2.0.1"
-//
 //   //Glide
 //   const val glide = "4.9.0"
 //   const val glideCompiler = "4.9.0"
@@ -75,7 +77,13 @@ object Design {
    const val material = "com.google.android.material:material:${Versions.material}"
 }
 
+object Recyclerview{
+   const val recycler_view = "androidx.recyclerview:recyclerview:${Versions.recyclerview}"
+}
 
+object Swiperefreshlayout{
+   const val swiperefreshlayout = "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.swiperefreshlayout}"
+}
 
 object Retrofit {
    const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
@@ -83,17 +91,13 @@ object Retrofit {
    const val adapter_coroutines =
       "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:${Versions.adapterCoroutines}"
    const val logging_interceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.interceptor}"
-
 }
 
+object Koin {
+   const val koin_android = "org.koin:koin-android:${Versions.koinAndroid}"
+   const val koin_view_model = "org.koin:koin-android-viewmodel:${Versions.koinViewModel}"
+}
 
-
-
-//object Koin {
-//   const val koin_android = "org.koin:koin-android:${Versions.koinAndroid}"
-//   const val koin_view_model = "org.koin:koin-android-viewmodel:${Versions.koinViewModel}"
-//}
-//
 //object Glide {
 //   const val glide = "com.github.bumptech.glide:glide:${Versions.glide}"
 //   const val glide_compiler = "com.github.bumptech.glide:compiler:${Versions.glideCompiler}"
