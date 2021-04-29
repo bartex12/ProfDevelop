@@ -43,7 +43,7 @@ dependencies {
     //recyclerview
     implementation Recyclerview.recycler_view
     //swiperefreshlayout
-    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    implementation Swiperefreshlayout.swiperefreshlayout
 
     //Retrofit 2
     implementation Retrofit.retrofit
