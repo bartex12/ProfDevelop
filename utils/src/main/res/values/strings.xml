@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">utils</string>
+    <string name="dialog_title_stub">Undefined error</string>
+    <string name="dialog_button_cancel">Cancel</string>
+</resources>
