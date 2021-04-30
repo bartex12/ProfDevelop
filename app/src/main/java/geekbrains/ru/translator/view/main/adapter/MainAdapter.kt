@@ -4,9 +4,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import geekbrains.ru.model.data.DataModel
+import geekbrains.ru.model.data.Meanings
 import geekbrains.ru.translator.R
-import geekbrains.ru.translator.model.data.DataModel
-import geekbrains.ru.translator.model.data.Meanings
 import kotlinx.android.synthetic.main.activity_main_recyclerview_item.view.*
 
 class MainAdapter(private var onListItemClickListener: OnListItemClickListener) :
@@ -54,9 +54,9 @@ class MainAdapter(private var onListItemClickListener: OnListItemClickListener) 
         var meaningsSeparatedByComma = ""
         for ((index, meaning) in meanings.withIndex()) {
             meaningsSeparatedByComma += if (index + 1 != meanings.size) {
-                String.format("%s%s", meaning.translation?.text, ", ")
+                String.format("%s%s", meaning.translation?.translation, ", ")
             } else {
-                meaning.translation?.text
+                meaning.translation?.translation
             }
         }
         return meaningsSeparatedByComma

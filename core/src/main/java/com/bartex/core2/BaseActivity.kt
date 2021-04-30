@@ -4,12 +4,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
-import geekbrains.ru.translator.R
-import geekbrains.ru.translator.model.data.AppState
-import geekbrains.ru.translator.model.data.DataModel
-import geekbrains.ru.translator.model.interactor.Interactor
-import geekbrains.ru.translator.utils.network.isOnline
-import geekbrains.ru.translator.utils.ui.AlertDialogFragment
+import com.bartex.utils.network.ui.AlertDialogFragment
+import com.bartex.utils.network.ui.isOnline
+import geekbrains.ru.model.data.AppState
+import geekbrains.ru.model.data.DataModel
 import kotlinx.android.synthetic.main.loading_layout.*
 
 abstract class BaseActivity<T : AppState, I : Interactor<T>> : AppCompatActivity() {

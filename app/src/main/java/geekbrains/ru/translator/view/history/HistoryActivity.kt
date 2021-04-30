@@ -3,11 +3,11 @@ package geekbrains.ru.translator.view.history
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.lifecycle.Observer
+import com.bartex.core2.BaseActivity
+import geekbrains.ru.model.data.AppState
+import geekbrains.ru.model.data.DataModel
 import geekbrains.ru.translator.R
-import geekbrains.ru.translator.model.data.AppState
-import geekbrains.ru.translator.model.data.DataModel
 import geekbrains.ru.translator.model.interactor.HistoryInteractor
-import geekbrains.ru.translator.view.base.BaseActivity
 import geekbrains.ru.translator.view.history.adapter.HistoryAdapter
 import geekbrains.ru.translator.viewmodel.HistoryViewModel
 import kotlinx.android.synthetic.main.activity_history.*

@@ -1,7 +1,7 @@
 package geekbrains.ru.translator.model.datasource
 
-import geekbrains.ru.translator.model.data.AppState
-import geekbrains.ru.translator.model.data.DataModel
+import geekbrains.ru.model.data.AppState
+import geekbrains.ru.model.data.DataModel
 import geekbrains.ru.translator.model.room.History
 import geekbrains.ru.translator.model.room.HistoryDao
 
@@ -27,10 +27,10 @@ class RoomDataBaseImplementation(val historyDao: HistoryDao) : DataSourceLocal<L
     private fun convertDataModelToHistory(appState: AppState): History? {
         return when(appState){
             is AppState.Success -> {
-                if (appState.data.isNullOrEmpty() || appState.data[0].text.isNullOrEmpty()){
+                if (appState.data.isNullOrEmpty() || appState.data!![0].text.isNullOrEmpty()){
                     null // если что-то null = возвращаем null
                 }else{
-                    History(appState.data[0].text!!, null) //иначе пишем в базу
+                    History(appState.data!![0].text!!, null) //иначе пишем в базу
                 }
             }
             else -> null

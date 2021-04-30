@@ -1,17 +1,25 @@
 package geekbrains.ru.translator.view.detail
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import com.bartex.core2.BaseActivity.Companion.DIALOG_FRAGMENT_TAG
+import com.bartex.utils.network.ui.AlertDialogFragment
+import com.bartex.utils.network.ui.isOnline
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
+import geekbrains.ru.model.data.DataModel
 import geekbrains.ru.translator.R
 import geekbrains.ru.translator.constants.Constants.Companion.DATA_MODEL
-import geekbrains.ru.translator.model.data.DataModel
-import geekbrains.ru.translator.utils.network.isOnline
-import geekbrains.ru.translator.utils.ui.AlertDialogFragment
-import geekbrains.ru.translator.view.base.BaseActivity.Companion.DIALOG_FRAGMENT_TAG
+import geekbrains.ru.translator.constants.Constants.Companion.DESCRIPTION_EXTRA
+import geekbrains.ru.translator.constants.Constants.Companion.SOUND_EXTRA
+import geekbrains.ru.translator.constants.Constants.Companion.TRANSCRIPTION_EXTRA
+import geekbrains.ru.translator.constants.Constants.Companion.URL_EXTRA
+import geekbrains.ru.translator.constants.Constants.Companion.WORD_EXTRA
 import kotlinx.android.synthetic.main.activity_detail.*
 import java.lang.Exception
 
@@ -19,6 +27,21 @@ class DetailActivity : AppCompatActivity() {
 
     companion object{
         const val TAG = "33333"
+
+        fun getIntent(
+            context: Context,
+            word: String,
+            transcription: String,
+            description: String,
+            url: String?,
+            soundUrl: String?
+        ): Intent = Intent(context, DetailActivity::class.java).apply {
+            putExtra(WORD_EXTRA, word)
+            putExtra(TRANSCRIPTION_EXTRA, transcription)
+            putExtra(DESCRIPTION_EXTRA, description)
+            putExtra(URL_EXTRA, url)
+            putExtra(SOUND_EXTRA, soundUrl)
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,14 +86,15 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun setData() {
-        val dataModel = intent.extras?.getParcelable<DataModel>(DATA_MODEL)
+        //val dataModel = intent.extras?.getParcelable<DataModel>(DATA_MODEL)
+        val bundle = intent.extras
 
-        tv_text.text =  dataModel?.text?:""
-        tv_transcription.text = dataModel?.meanings?.get(0)?.transcription?:""
-        tv_translation.text = dataModel?.meanings?.get(0)?.translation?.text?:""
-        val soundUrl = dataModel?.meanings?.get(0)?.soundUrl
+        tv_text.text =  bundle?.getString(WORD_EXTRA)
+        tv_transcription.text = bundle?.getString(TRANSCRIPTION_EXTRA)
+        tv_translation.text = bundle?.getString(DESCRIPTION_EXTRA)
+        val soundUrl =  bundle?.getString(SOUND_EXTRA)
         Log.d(TAG, "DetailActivity onCreate soundUrl = $soundUrl")
-        val imageUrl = dataModel?.meanings?.get(0)?.imageUrl
+        val imageUrl =  bundle?.getString(URL_EXTRA)
         Log.d(TAG, "DetailActivity onCreate imageUrl = $imageUrl")
 
         if (imageUrl.isNullOrBlank()){
@@ -80,7 +104,7 @@ class DetailActivity : AppCompatActivity() {
                 .load("https:$imageUrl")
                 .placeholder(R.drawable.ic_no_photo_vector)
                 .error(R.drawable.ic_load_error_vector)
-                .into(imageView, object : Callback{ //просто для памяти, что есть колбэк
+                .into(imageView as ImageView?, object : Callback{ //просто для памяти, что есть колбэк
                     override fun onSuccess() {
                         stopRefreshAnimationIfNeeded()
                     }
@@ -97,4 +121,6 @@ class DetailActivity : AppCompatActivity() {
             }
         }
     }
+
+
 }

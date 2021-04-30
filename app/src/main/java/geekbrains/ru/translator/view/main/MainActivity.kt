@@ -6,13 +6,13 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bartex.core2.BaseActivity
+import com.bartex.utils.network.ui.isOnline
+import geekbrains.ru.model.data.AppState
+import geekbrains.ru.model.data.DataModel
 import geekbrains.ru.translator.R
 import geekbrains.ru.translator.constants.Constants.Companion.DATA_MODEL
-import geekbrains.ru.translator.model.data.AppState
-import geekbrains.ru.translator.model.data.DataModel
 import geekbrains.ru.translator.model.interactor.MainInteractor
-import geekbrains.ru.translator.utils.network.isOnline
-import geekbrains.ru.translator.view.base.BaseActivity
 import geekbrains.ru.translator.view.detail.DetailActivity
 import geekbrains.ru.translator.view.history.HistoryActivity
 import geekbrains.ru.translator.view.main.adapter.MainAdapter
@@ -37,9 +37,17 @@ class MainActivity() : BaseActivity<AppState, MainInteractor>() {
         object : MainAdapter.OnListItemClickListener {
             override fun onItemClick(data: DataModel) {
 
-                val intent = Intent(this@MainActivity, DetailActivity::class.java)
-                intent.putExtra(DATA_MODEL, data)
-                startActivity(intent)
+                startActivity(DetailActivity.getIntent(
+                    this@MainActivity,
+                    data.text!!,
+                    data.meanings?.get(0)?.transcription?:"",
+                    data.meanings?.get(0)?.translation?.translation?:"",
+                    data.meanings?.get(0)?.imageUrl,
+                    data.meanings?.get(0)?.soundUrl
+                ))
+//                val intent = Intent(this@MainActivity, DetailActivity::class.java)
+//                intent.putExtra(DATA_MODEL, data)
+//                startActivity(intent)
             }
         }
 

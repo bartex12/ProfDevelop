@@ -27,7 +27,9 @@ android {
 
 dependencies {
 
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(Modules.core)
+    implementation project(Modules.model)
+    implementation project(Modules.utils)
 
     //Kotlin
     implementation Kotlin.core
@@ -67,5 +69,5 @@ dependencies {
     testImplementation TestImpl.junit
     androidTestImplementation TestImpl.runner
     androidTestImplementation TestImpl.espresso
-
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 }

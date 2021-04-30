@@ -2,10 +2,10 @@ package com.bartex.core2
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import geekbrains.ru.translator.model.data.AppState
+import geekbrains.ru.model.data.AppState
 import kotlinx.coroutines.*
 
-abstract class BaseViewModel<T:AppState> (
+abstract class BaseViewModel<T: AppState> (
     protected val _liveDataForViewToObserve: MutableLiveData<T> = MutableLiveData()
 ): ViewModel(){
      //изменяем открытый метод на абстрактный

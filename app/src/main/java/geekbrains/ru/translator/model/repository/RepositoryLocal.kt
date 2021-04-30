@@ -1,7 +1,6 @@
 package geekbrains.ru.translator.model.repository
 
-import geekbrains.ru.translator.model.data.AppState
-import geekbrains.ru.translator.model.data.DataModel
+import geekbrains.ru.model.data.AppState
 
 interface RepositoryLocal<T> : Repository<T>{
     suspend fun saveToDB(appState: AppState)

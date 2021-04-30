@@ -1,12 +1,12 @@
 package geekbrains.ru.translator.model.datasource
 
-import geekbrains.ru.translator.model.data.DataModel
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import geekbrains.ru.model.data.DataModel
 
 class RetrofitImplementation : DataSource<List<DataModel>> {
     // Добавляем suspend и .await()

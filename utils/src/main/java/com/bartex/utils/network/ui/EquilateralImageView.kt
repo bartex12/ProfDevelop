@@ -1,4 +1,4 @@
-package geekbrains.ru.translator.utils.ui
+package com.bartex.utils.network.ui
 
 import android.content.Context
 import android.util.AttributeSet

@@ -1,8 +1,9 @@
 package geekbrains.ru.translator.viewmodel
 
 import androidx.lifecycle.LiveData
-import geekbrains.ru.translator.model.data.AppState
-import geekbrains.ru.translator.model.data.DataModel
+import com.bartex.core2.BaseViewModel
+import geekbrains.ru.model.data.AppState
+import geekbrains.ru.model.data.DataModel
 import geekbrains.ru.translator.model.interactor.HistoryInteractor
 import kotlinx.coroutines.launch
 

@@ -1,7 +1,7 @@
 package geekbrains.ru.translator.model.repository
 
 import android.util.Log
-import geekbrains.ru.translator.model.data.DataModel
+import geekbrains.ru.model.data.DataModel
 import geekbrains.ru.translator.model.datasource.DataSource
 
 class RepositoryImplementation (private val dataSource:DataSource<List<DataModel>>) :

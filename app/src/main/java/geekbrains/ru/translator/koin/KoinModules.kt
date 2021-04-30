@@ -1,7 +1,7 @@
 package geekbrains.ru.translator.koin
 
 import androidx.room.Room
-import geekbrains.ru.translator.model.data.DataModel
+import geekbrains.ru.model.data.DataModel
 import geekbrains.ru.translator.model.datasource.RetrofitImplementation
 import geekbrains.ru.translator.model.datasource.RoomDataBaseImplementation
 import geekbrains.ru.translator.model.interactor.HistoryInteractor
@@ -13,8 +13,6 @@ import geekbrains.ru.translator.model.repository.RepositoryLocal
 import geekbrains.ru.translator.model.room.HistoryDataBase
 import geekbrains.ru.translator.viewmodel.HistoryViewModel
 import geekbrains.ru.translator.viewmodel.MainViewModel
-import org.koin.android.viewmodel.dsl.viewModel
-import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 // Для удобства создадим две переменные: в одной находятся зависимости,

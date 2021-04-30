@@ -1,6 +1,6 @@
 package geekbrains.ru.translator.model.datasource
 
-import geekbrains.ru.translator.model.data.DataModel
+import geekbrains.ru.model.data.DataModel
 import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 import retrofit2.http.Query

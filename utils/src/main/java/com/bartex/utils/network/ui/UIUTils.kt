@@ -1,8 +1,9 @@
-package geekbrains.ru.translator.utils.ui
+package com.bartex.utils.network.ui
 
 import android.content.Context
 import androidx.appcompat.app.AlertDialog
-import geekbrains.ru.translator.R
+import com.bartex.utils.R
+
 
 fun getStubAlertDialog(context: Context): AlertDialog {
     return getAlertDialog(context, null, null)

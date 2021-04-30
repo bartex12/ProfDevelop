@@ -1,4 +1,4 @@
-package geekbrains.ru.translator.model.data
+package geekbrains.ru.model.data
 
 sealed class AppState {
 

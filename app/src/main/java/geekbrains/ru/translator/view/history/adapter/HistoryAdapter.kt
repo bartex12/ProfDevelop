@@ -5,9 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import geekbrains.ru.model.data.DataModel
 import geekbrains.ru.translator.R
-import geekbrains.ru.translator.model.data.DataModel
-import geekbrains.ru.translator.view.main.adapter.MainAdapter
 import kotlinx.android.synthetic.main.history_item.view.*
 
 class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.RecyclerItemViewHolder>() {

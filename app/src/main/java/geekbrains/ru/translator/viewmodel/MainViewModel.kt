@@ -1,14 +1,15 @@
  package geekbrains.ru.translator.viewmodel
 
 import androidx.lifecycle.LiveData
-import geekbrains.ru.translator.model.data.AppState
-import geekbrains.ru.translator.model.data.DataModel
-import geekbrains.ru.translator.model.data.Meanings
+import com.bartex.core2.BaseViewModel
+import geekbrains.ru.model.data.AppState
+import geekbrains.ru.model.data.DataModel
+import geekbrains.ru.model.data.Meanings
 import geekbrains.ru.translator.model.interactor.MainInteractor
 import kotlinx.coroutines.launch
 
 
-class MainViewModel (private val interactor: MainInteractor) :
+ class MainViewModel (private val interactor: MainInteractor) :
     BaseViewModel<AppState>() {
 
     //не понял, зачем копируем переменную из базового класса
@@ -59,8 +60,8 @@ class MainViewModel (private val interactor: MainInteractor) :
   fun  parseResult(dataModel:DataModel, newDataModel:ArrayList<DataModel>) {
       if (!dataModel.text.isNullOrBlank() && !dataModel.meanings.isNullOrEmpty()) {
           val newMeanings = arrayListOf<Meanings>()
-          for (meaning in dataModel.meanings) {
-              if (meaning.translation != null && !meaning.translation.text.isNullOrBlank()) {
+          for (meaning in dataModel.meanings!!) {
+              if (meaning.translation != null && !meaning.translation!!.translation.isNullOrBlank()) {
                   newMeanings.add(Meanings(translation = meaning.translation, imageUrl = meaning.imageUrl,
                   transcription = meaning.transcription, soundUrl = meaning.soundUrl))
               }

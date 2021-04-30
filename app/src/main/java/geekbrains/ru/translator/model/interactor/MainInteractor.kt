@@ -1,7 +1,8 @@
 package geekbrains.ru.translator.model.interactor
 
-import geekbrains.ru.translator.model.data.AppState
-import geekbrains.ru.translator.model.data.DataModel
+import com.bartex.core2.Interactor
+import geekbrains.ru.model.data.AppState
+import geekbrains.ru.model.data.DataModel
 import geekbrains.ru.translator.model.repository.Repository
 import geekbrains.ru.translator.model.repository.RepositoryLocal
 
