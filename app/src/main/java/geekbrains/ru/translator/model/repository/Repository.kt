@@ -1,8 +1,7 @@
 package geekbrains.ru.translator.model.repository
 
-import io.reactivex.Observable
+import geekbrains.ru.model.data.DataModel
 
 interface Repository<T> {
-
-    fun getData(word: String): Observable<T>
+    suspend fun getData(word: String): List<DataModel>
 }

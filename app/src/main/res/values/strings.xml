@@ -1,10 +1,24 @@
 <resources>
     <string name="app_name">Dictionary</string>
+    <string name="detail_name">Details</string>
     <string name="error_textview_stub">Error</string>
     <string name="reload_button">Reload</string>
     <string name="undefined_error">Undefined error</string>
-    <string name="empty_server_response_on_success">Response from server is empty</string>
     <string name="button_search">Search</string>
     <string name="search_hint">New word</string>
     <string name="delete_description">X</string>
+    <string name="pronons">Произношение</string>
+    <string name="word">Слово</string>
+    <string name="transl">Перевод</string>
+    <string name="transcr">Транскрипция</string>
+    <string name="dialog_button_cancel">Cancel</string>
+    <string name="dialog_title_stub">Неизвестная ошибка</string>
+    <string name="dialog_title_device_is_offline">Нет соединения с Интернетом</string>
+    <string name="dialog_message_device_is_offline">Вы не можете использовать приложение без подключения к Интернету. Пожалуйста, проверьте
+         интернет-соединение</string>
+    <string name="empty_server_response_on_success">Ничего не удалось найти</string>
+    <string name="dialog_tittle_sorry">Извините</string>
+    <string name="error_stub">Ошибка</string>
+    <string name="menu_title_history">История</string>
+    <string name="history_name">History</string>
 </resources>

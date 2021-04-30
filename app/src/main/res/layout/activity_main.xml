@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        xmlns:tools="http://schemas.android.com/tools"
         android:fitsSystemWindows="true">
 
     <FrameLayout
@@ -30,7 +30,8 @@
             android:id="@+id/loading_frame_layout"
             android:layout_width="match_parent"
             android:visibility="gone"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            tools:visibility="visible">
 
 
         <ProgressBar
@@ -47,24 +48,4 @@
                 android:layout_height="wrap_content"/>
     </FrameLayout>
 
-    <LinearLayout
-            android:gravity="center"
-            android:orientation="vertical"
-            android:visibility="gone"
-            android:id="@+id/error_linear_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        <TextView
-                android:id="@+id/error_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/error_textview_stub"/>
-
-        <com.google.android.material.button.MaterialButton
-                android:id="@+id/reload_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/reload_button"/>
-    </LinearLayout>
 </FrameLayout>
