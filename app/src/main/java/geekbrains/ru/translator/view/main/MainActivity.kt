@@ -7,16 +7,13 @@ import android.view.MenuItem
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bartex.core2.BaseActivity
+import com.bartex.historyscreen.HistoryActivity
 import com.bartex.utils.network.ui.isOnline
 import geekbrains.ru.model.data.AppState
 import geekbrains.ru.model.data.DataModel
 import geekbrains.ru.translator.R
-import geekbrains.ru.translator.constants.Constants.Companion.DATA_MODEL
-import geekbrains.ru.translator.model.interactor.MainInteractor
 import geekbrains.ru.translator.view.detail.DetailActivity
-import geekbrains.ru.translator.view.history.HistoryActivity
 import geekbrains.ru.translator.view.main.adapter.MainAdapter
-import geekbrains.ru.translator.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.viewmodel.ext.android.viewModel
 

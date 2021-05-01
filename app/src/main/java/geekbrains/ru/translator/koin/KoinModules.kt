@@ -4,15 +4,15 @@ import androidx.room.Room
 import geekbrains.ru.model.data.DataModel
 import geekbrains.ru.translator.model.datasource.RetrofitImplementation
 import geekbrains.ru.translator.model.datasource.RoomDataBaseImplementation
-import geekbrains.ru.translator.model.interactor.HistoryInteractor
-import geekbrains.ru.translator.model.interactor.MainInteractor
+import geekbrains.ru.translator.view.main.MainInteractor
 import geekbrains.ru.translator.model.repository.Repository
 import geekbrains.ru.translator.model.repository.RepositoryImplementation
 import geekbrains.ru.translator.model.repository.RepositoryImplementationLocal
 import geekbrains.ru.translator.model.repository.RepositoryLocal
 import geekbrains.ru.translator.model.room.HistoryDataBase
-import geekbrains.ru.translator.viewmodel.HistoryViewModel
-import geekbrains.ru.translator.viewmodel.MainViewModel
+import geekbrains.ru.translator.view.main.MainViewModel
+import com.bartex.historyscreen.HistoryViewModel
+import com.bartex.historyscreen.HistoryInteractor
 import org.koin.dsl.module
 
 // Для удобства создадим две переменные: в одной находятся зависимости,
