@@ -21,4 +21,6 @@
     <string name="error_stub">Ошибка</string>
     <string name="menu_title_history">История</string>
     <string name="history_name">History</string>
+
+    <string name="title_historyscreenfeature">History Screen Feature</string>
 </resources>

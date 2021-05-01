@@ -23,15 +23,19 @@ android {
         sourceCompatibility Config.java_version
         targetCompatibility Config.java_version
     }
+    //динамически загружаемый контент — модуль historyScreen
+    dynamicFeatures = [Modules.historyScreen]
 }
 
 dependencies {
+
+    implementation 'com.google.android.play:core:1.10.0'
 
     implementation project(Modules.core)
     implementation project(Modules.model)
     implementation project(Modules.utils)
     implementation project(Modules.repository)
-    implementation project(Modules.historyScreen)
+    //implementation project(Modules.historyScreen)
 
     //Kotlin
     implementation Kotlin.core

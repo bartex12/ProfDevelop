@@ -17,8 +17,6 @@ abstract class BaseActivity<T : AppState, I : Interactor<T>> : AppCompatActivity
     }
 
     abstract val model:ViewModel
-    //abstract  fun renderData(appState: AppState)
-
     protected var isNetworkAvailable: Boolean = false
 
 
