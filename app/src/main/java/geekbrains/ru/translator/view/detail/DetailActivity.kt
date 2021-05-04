@@ -12,9 +12,7 @@ import com.bartex.utils.network.ui.AlertDialogFragment
 import com.bartex.utils.network.ui.isOnline
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
-import geekbrains.ru.model.data.DataModel
 import geekbrains.ru.translator.R
-import geekbrains.ru.translator.constants.Constants.Companion.DATA_MODEL
 import geekbrains.ru.translator.constants.Constants.Companion.DESCRIPTION_EXTRA
 import geekbrains.ru.translator.constants.Constants.Companion.SOUND_EXTRA
 import geekbrains.ru.translator.constants.Constants.Companion.TRANSCRIPTION_EXTRA

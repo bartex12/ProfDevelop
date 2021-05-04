@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+        package="com.bartex.historyscreen">
+    <application>
+        <activity
+                android:name="com.bartex.historyscreen.HistoryActivity"
+                android:screenOrientation="portrait"/>
+    </application>
+</manifest>

@@ -4,19 +4,26 @@ import androidx.room.Room
 import geekbrains.ru.model.data.DataModel
 import geekbrains.ru.translator.model.datasource.RetrofitImplementation
 import geekbrains.ru.translator.model.datasource.RoomDataBaseImplementation
-import geekbrains.ru.translator.model.interactor.HistoryInteractor
-import geekbrains.ru.translator.model.interactor.MainInteractor
+import geekbrains.ru.translator.view.main.MainInteractor
 import geekbrains.ru.translator.model.repository.Repository
 import geekbrains.ru.translator.model.repository.RepositoryImplementation
 import geekbrains.ru.translator.model.repository.RepositoryImplementationLocal
 import geekbrains.ru.translator.model.repository.RepositoryLocal
 import geekbrains.ru.translator.model.room.HistoryDataBase
-import geekbrains.ru.translator.viewmodel.HistoryViewModel
-import geekbrains.ru.translator.viewmodel.MainViewModel
+import geekbrains.ru.translator.view.main.MainViewModel
+import org.koin.core.context.loadKoinModules
 import org.koin.dsl.module
 
-// Для удобства создадим две переменные: в одной находятся зависимости,
-// используемые во всём приложении, во второй - зависимости конкретного экрана
+// Объявим функцию, которая будет создавать зависимости по требованию
+fun injectDependencies() = loadModules
+// Ленивая инициализация создаст зависимости только тогда, когда функция будет
+// вызвана
+private val loadModules by lazy {
+    // Функция библиотеки Koin
+    loadKoinModules(listOf(application, mainScreen))
+}
+
+// Остальное никак не изменилось
 
 // Функция single сообщает Koin, что эта зависимость должна храниться
 // в виде синглтона (в Dagger есть похожая аннотация)
@@ -36,10 +43,4 @@ val application = module {
 val mainScreen = module {
     factory { MainViewModel(get()) } //так тоже работает
     factory { MainInteractor(get(), get()) }
-    //viewModel { MainViewModel(get())}
-}
-
-val historyScreen = module {
-    factory { HistoryViewModel(get()) }
-    factory { HistoryInteractor(get(), get()) }
 }
