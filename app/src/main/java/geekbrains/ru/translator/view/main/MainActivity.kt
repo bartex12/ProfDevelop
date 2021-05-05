@@ -30,6 +30,7 @@ import geekbrains.ru.translator.koin.injectDependencies
 import geekbrains.ru.translator.view.detail.DetailActivity
 import geekbrains.ru.translator.view.main.adapter.MainAdapter
 import kotlinx.android.synthetic.main.activity_main.*
+import org.koin.android.scope.currentScope
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity() : BaseActivity<AppState, MainInteractor>() {
@@ -140,7 +141,10 @@ class MainActivity() : BaseActivity<AppState, MainInteractor>() {
     private fun initViewModel() {
         check(main_activity_recyclerview.adapter == null) { "The ViewModel should be initialised first" }
         injectDependencies()
-        val viewModel: MainViewModel by viewModel()
+        // при использовании scope модель мы получаем через currentScope, остальное без изменений
+        //Теперь граф зависимостей создаётся, когда он действительно нужен,
+        // и живёт столько же, сколько и компоненты, в которых применяется
+        val viewModel: MainViewModel by currentScope.inject()
         model = viewModel
         //подписываемся на изменение данных
         model.getResult().observe(this, Observer { renderData(it) })
