@@ -7,8 +7,11 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bartex.core2.BaseActivity
 import com.bartex.utils.network.ui.isOnline
+import com.bartex.utils.network.ui.viewById
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
@@ -42,6 +45,10 @@ class MainActivity() : BaseActivity<AppState, MainInteractor>() {
     private lateinit var splitInstallManager: SplitInstallManager
     private val adapter: MainAdapter by lazy { MainAdapter(onListItemClickListener) }
     private lateinit var appUpdateManager: AppUpdateManager
+
+    //используем вместо syntetic
+    private val main_activity_recyclerview by viewById<RecyclerView>(R.id.main_activity_recyclerview)
+    private val search_fab by viewById<FloatingActionButton>(R.id.search_fab)
 
     private val onListItemClickListener: MainAdapter.OnListItemClickListener =
         object : MainAdapter.OnListItemClickListener {
@@ -111,7 +118,6 @@ class MainActivity() : BaseActivity<AppState, MainInteractor>() {
             }
         }
     }
-
 
     private fun checkForUpdates() {
         // Создаём менеджер
