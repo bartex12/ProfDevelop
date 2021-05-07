@@ -7,9 +7,10 @@ import android.util.Log
 import android.view.MenuItem
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import com.bartex.core2.BaseActivity.Companion.DIALOG_FRAGMENT_TAG
 import com.bartex.utils.network.ui.AlertDialogFragment
-import com.bartex.utils.network.ui.isOnline
+import com.bartex.utils.network.ui.OnlineLiveData
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import geekbrains.ru.translator.R
@@ -19,7 +20,6 @@ import geekbrains.ru.translator.constants.Constants.Companion.TRANSCRIPTION_EXTR
 import geekbrains.ru.translator.constants.Constants.Companion.URL_EXTRA
 import geekbrains.ru.translator.constants.Constants.Companion.WORD_EXTRA
 import kotlinx.android.synthetic.main.activity_detail.*
-import java.lang.Exception
 
 class DetailActivity : AppCompatActivity() {
 
@@ -66,15 +66,18 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun startLoadingOrShowError() {
-        if (isOnline(applicationContext)) {
-            setData()
-        } else {
-            AlertDialogFragment.newInstance(
-                getString(R.string.dialog_title_device_is_offline),
-                getString(R.string.dialog_message_device_is_offline)
-            ).show( supportFragmentManager,  DIALOG_FRAGMENT_TAG )
-            stopRefreshAnimationIfNeeded()
-        }
+        OnlineLiveData(this).observe(this@DetailActivity,
+        Observer {
+            if (it) {
+                setData()
+            } else {
+                AlertDialogFragment.newInstance(
+                    getString(R.string.dialog_title_device_is_offline),
+                    getString(R.string.dialog_message_device_is_offline)
+                ).show( supportFragmentManager,  DIALOG_FRAGMENT_TAG )
+                stopRefreshAnimationIfNeeded()
+            }
+        })
     }
 
     private fun stopRefreshAnimationIfNeeded() {
@@ -84,7 +87,7 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun setData() {
-        //val dataModel = intent.extras?.getParcelable<DataModel>(DATA_MODEL)
+
         val bundle = intent.extras
 
         tv_text.text =  bundle?.getString(WORD_EXTRA)

@@ -9,7 +9,6 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bartex.core2.BaseActivity
-import com.bartex.utils.network.ui.isOnline
 import com.bartex.utils.network.ui.viewById
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
@@ -32,9 +31,7 @@ import geekbrains.ru.translator.constants.Constants.Companion.REQUEST_CODE
 import geekbrains.ru.translator.koin.injectDependencies
 import geekbrains.ru.translator.view.detail.DetailActivity
 import geekbrains.ru.translator.view.main.adapter.MainAdapter
-import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.scope.currentScope
-import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity() : BaseActivity<AppState, MainInteractor>() {
 
@@ -162,8 +159,6 @@ class MainActivity() : BaseActivity<AppState, MainInteractor>() {
             searchDialogFragment.setOnSearchClickListener(object :
                 SearchDialogFragment.OnSearchClickListener {
                 override fun onClick(searchWord: String) {
-                    //только делаем запрос без подписки
-                    isNetworkAvailable = isOnline(applicationContext)
                     if (isNetworkAvailable) {
                         model.getData(searchWord, isNetworkAvailable)
                     } else {

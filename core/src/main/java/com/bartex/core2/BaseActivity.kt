@@ -2,10 +2,12 @@ package com.bartex.core2
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import com.bartex.utils.network.ui.AlertDialogFragment
-import com.bartex.utils.network.ui.isOnline
+import com.bartex.utils.network.ui.OnlineLiveData
 import geekbrains.ru.model.data.AppState
 import geekbrains.ru.model.data.DataModel
 import kotlinx.android.synthetic.main.loading_layout.*
@@ -17,18 +19,30 @@ abstract class BaseActivity<T : AppState, I : Interactor<T>> : AppCompatActivity
     }
 
     abstract val model:ViewModel
-    protected var isNetworkAvailable: Boolean = false
+    //меняем на true чтобы сразу не появлялось окно о том, что нет интернета
+    protected var isNetworkAvailable: Boolean = true
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //метод из NetUtils
-        isNetworkAvailable = isOnline(applicationContext)
+        //следим за сетью
+        OnlineLiveData(this).observe(
+            this@BaseActivity,
+            Observer<Boolean> {
+                isNetworkAvailable = it
+                if (!isNetworkAvailable) {
+                    Toast.makeText(
+                        this@BaseActivity,
+                        R.string.dialog_message_device_is_offline,
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            })
     }
 
     override fun onResume() {
         super.onResume()
-        isNetworkAvailable = isOnline(applicationContext)
+        //isNetworkAvailable = isOnline(applicationContext)
         if (!isNetworkAvailable && isDialogNull()) {
             showNoInternetConnectionDialog()
         }
