@@ -10,8 +10,11 @@ import geekbrains.ru.translator.model.repository.RepositoryImplementation
 import geekbrains.ru.translator.model.repository.RepositoryImplementationLocal
 import geekbrains.ru.translator.model.repository.RepositoryLocal
 import geekbrains.ru.translator.model.room.HistoryDataBase
+import geekbrains.ru.translator.view.main.MainActivity
 import geekbrains.ru.translator.view.main.MainViewModel
+import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.context.loadKoinModules
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 // Объявим функцию, которая будет создавать зависимости по требованию
@@ -41,6 +44,8 @@ val application = module {
 // Функция factory сообщает Koin, что эту зависимость нужно создавать каждый
 // раз заново, что как раз подходит для Activity и её компонентов.
 val mainScreen = module {
-    factory { MainViewModel(get()) } //так тоже работает
-    factory { MainInteractor(get(), get()) }
+    scope(named<MainActivity>()){
+        scoped { MainInteractor(get(), get()) }
+        viewModel { MainViewModel(get()) }
+    }
 }

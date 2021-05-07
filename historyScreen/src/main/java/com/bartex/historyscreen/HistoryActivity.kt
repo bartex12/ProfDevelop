@@ -7,6 +7,7 @@ import com.bartex.core2.BaseActivity
 import geekbrains.ru.model.data.AppState
 import geekbrains.ru.model.data.DataModel
 import kotlinx.android.synthetic.main.activity_history.*
+import org.koin.android.scope.currentScope
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class HistoryActivity : BaseActivity<AppState, HistoryInteractor>() {
@@ -47,7 +48,10 @@ class HistoryActivity : BaseActivity<AppState, HistoryInteractor>() {
     private fun iniViewModel() {
         check(history_activity_recyclerview.adapter == null) { "The ViewModel should be initialised first" }
         injectDependencies()
-        val viewModel: HistoryViewModel by viewModel()
+        // при использовании scope модель мы получаем через currentScope, остальное без изменений
+        //Теперь граф зависимостей создаётся, когда он действительно нужен,
+        // и живёт столько же, сколько и компоненты, в которых применяется
+        val viewModel: HistoryViewModel by currentScope.inject()
         model = viewModel
         model.getResult().observe(this@HistoryActivity, Observer<AppState> {
             renderData(it)
