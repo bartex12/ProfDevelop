@@ -1,6 +1,11 @@
 package com.bartex.historyscreen
 
+import android.annotation.SuppressLint
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
+import android.view.Menu
 import android.view.MenuItem
 import androidx.lifecycle.Observer
 import com.bartex.core2.BaseActivity
@@ -31,6 +36,8 @@ class HistoryActivity : BaseActivity<AppState, HistoryInteractor>() {
         model.getData("", false)
     }
 
+
+    @SuppressLint("InlinedApi")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {

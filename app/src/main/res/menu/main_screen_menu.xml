@@ -6,4 +6,10 @@
             android:title="@string/menu_title_history"
             android:icon="@drawable/ic_baseline_history_24"
             app:showAsAction="always"/>
+
+    <item
+            android:id="@+id/menu_screen_settings"
+            android:title="@string/menu_title_settings"
+            android:icon="@drawable/ic_baseline_settings_24"
+            app:showAsAction="always"/>
 </menu>
