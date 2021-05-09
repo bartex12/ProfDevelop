@@ -13,10 +13,7 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".view.history.HistoryActivity"
-                android:label="@string/history_name">
 
-        </activity>
         <activity
                 android:name=".view.detail.DetailActivity"
                 android:label="@string/detail_name">

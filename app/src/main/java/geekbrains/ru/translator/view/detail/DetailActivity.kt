@@ -1,9 +1,13 @@
 package geekbrains.ru.translator.view.detail
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
+import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
@@ -55,10 +59,25 @@ class DetailActivity : AppCompatActivity() {
         setData()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_screen_menu, menu)
+        //запрещаем показ пункта меню на этом экране
+        menu?.findItem(R.id.menu_history)?.isVisible = false
+        //разрешаем показ пункта если версия не меньше Q
+        menu?.findItem(R.id.menu_screen_settings)?.isVisible =
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    @SuppressLint("InlinedApi")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
                 onBackPressed()
+                true
+            }
+            R.id.menu_screen_settings -> {
+                startActivityForResult(Intent(Settings.Panel.ACTION_VOLUME), 222)
                 true
             }
             else -> super.onOptionsItemSelected(item)
