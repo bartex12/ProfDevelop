@@ -34,9 +34,9 @@
 
             <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/search_edit_text"
+                    style="@style/BaseEditTextStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    style="@style/BaseEditTextStyle"/>
+                    android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <ImageView

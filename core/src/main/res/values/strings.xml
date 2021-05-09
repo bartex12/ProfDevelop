@@ -1,0 +1,9 @@
+<resources>
+
+    <string name="dialog_title_device_is_offline">Нет соединения с Интернетом</string>
+    <string name="dialog_message_device_is_offline">Вы не можете использовать приложение без подключения к Интернету. Пожалуйста, проверьте
+         интернет-соединение</string>
+    <string name="error_stub">Ошибка</string>
+    <string name="dialog_tittle_sorry">Извините</string>
+    <string name="empty_server_response_on_success">Ничего не удалось найти</string>
+</resources>
